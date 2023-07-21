@@ -7,7 +7,11 @@ interface RepoDirectoryPropsI {
 
 async function fetchRepo(name: string) {
   const response = await fetch(
-    `https://api.github.com/repos/sarojghalan/${name}`
+    `https://api.github.com/repos/sarojghalan/${name}`, {
+      next: {
+        revalidate: 60
+      }
+    }
   );
   const repo = await response.json();
   return repo;
