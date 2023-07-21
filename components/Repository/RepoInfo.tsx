@@ -7,7 +7,11 @@ interface PreInfoParamsI {
 async function fetchRepoContent(name: string) {
     await new Promise((resolve) => setInterval(resolve, 1000));
   const response = await fetch(
-    `https://api.github.com/repos/sarojghalan/${name}/contents`
+    `https://api.github.com/repos/sarojghalan/${name}/contents` , {
+      next : {
+        revalidate: 60
+      }
+    }
   );
 
   const content = await response.json();
